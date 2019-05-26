@@ -1,3 +1,16 @@
 <resources>
+    <!--Login information-->
+    <string name="login_gabriel">gabriel.barbosa@curious-hawk-2uzx2g.com</string>
+    <string name="password_gabriel">GBarbosa00</string>
+    <!--Login information-->
     <string name="app_name">OPTForm</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="logged_at">Logged at %s</string>
+    <string name="login_error">Something wrong happened, try again</string>
+    <string name="main_title">Observação do posto de trabalho</string>
+    <string name="welcome">Bim vindo, %s!</string>
+    <string name="new_opt">Nova OPT</string>
+    <string name="minhas_opts">Minhas OPTs</string>
 </resources>
