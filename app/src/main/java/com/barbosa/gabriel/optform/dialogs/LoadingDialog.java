@@ -1,4 +1,4 @@
-package com.barbosa.gabriel.optform.dialog;
+package com.barbosa.gabriel.optform.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;

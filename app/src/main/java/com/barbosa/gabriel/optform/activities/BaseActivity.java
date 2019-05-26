@@ -1,10 +1,10 @@
-package com.barbosa.gabriel.optform.activity;
+package com.barbosa.gabriel.optform.activities;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.barbosa.gabriel.optform.dialog.LoadingDialog;
+import com.barbosa.gabriel.optform.dialogs.LoadingDialog;
 
 public class BaseActivity extends AppCompatActivity {
 

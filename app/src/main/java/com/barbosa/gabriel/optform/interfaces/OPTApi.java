@@ -1,6 +1,6 @@
-package com.barbosa.gabriel.optform.Interface;
+package com.barbosa.gabriel.optform.interfaces;
 
-import com.barbosa.gabriel.optform.model.Supervisor;
+import com.barbosa.gabriel.optform.models.Supervisor;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

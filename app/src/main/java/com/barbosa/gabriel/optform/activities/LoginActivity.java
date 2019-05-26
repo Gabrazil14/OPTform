@@ -1,4 +1,4 @@
-package com.barbosa.gabriel.optform.activity;
+package com.barbosa.gabriel.optform.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,15 +7,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.barbosa.gabriel.optform.Interface.SalesForceLoginApi;
 import com.barbosa.gabriel.optform.MainApplication;
 import com.barbosa.gabriel.optform.R;
-import com.barbosa.gabriel.optform.model.Session;
+import com.barbosa.gabriel.optform.interfaces.SalesForceLoginApi;
+import com.barbosa.gabriel.optform.models.Session;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends BaseActivity {
 
@@ -35,11 +36,15 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 showLoadingDialog(LoginActivity.this);
-                Retrofit retrofit = MainApplication.getRetrofit(SalesForceLoginApi.loginUrl);
+                Retrofit retrofit = new Retrofit.Builder()
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .baseUrl(SalesForceLoginApi.LOGIN_URL)
+                        .build();
+
                 SalesForceLoginApi loginApi = retrofit.create(SalesForceLoginApi.class);
                 Call<Session> call = loginApi.login("password",
-                        "3MVG9ZF4bs_.MKug78PunwIbV3anh9yu_vTv6ifsF0L2GJTTpAA1qBdWRQ3I8aHZYDqVfAo_xOl7MK8Is27Ho",
-                        "CF0025345F3A6B3FB2A8254426B931BAF560C20C82FEA8407353DE54A614F4EA",
+                        SalesForceLoginApi.CLIENT_ID,
+                        SalesForceLoginApi.CLIENT_SECRET,
                         userName.getText().toString(),
                         password.getText().toString());
 
@@ -49,13 +54,13 @@ public class LoginActivity extends BaseActivity {
                         if (response.isSuccessful()) {
                             Session session = response.body();
 
-                            ((MainApplication) getApplication()).saveSession(session);
+                            MainApplication.saveSession(session);
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             hideLoadingDialog();
                             startActivity(intent);
-                            finish();
+                            finishAffinity();
                         } else {
                             Toast.makeText(LoginActivity.this, getString(R.string.login_error), Toast.LENGTH_LONG).show();
                             hideLoadingDialog();
@@ -71,7 +76,6 @@ public class LoginActivity extends BaseActivity {
                 });
             }
         });
-
 
     }
 }

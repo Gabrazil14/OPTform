@@ -1,15 +1,15 @@
-package com.barbosa.gabriel.optform.activity;
+package com.barbosa.gabriel.optform.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.barbosa.gabriel.optform.Interface.OPTApi;
 import com.barbosa.gabriel.optform.MainApplication;
 import com.barbosa.gabriel.optform.R;
-import com.barbosa.gabriel.optform.model.Session;
-import com.barbosa.gabriel.optform.model.Supervisor;
+import com.barbosa.gabriel.optform.interfaces.OPTApi;
+import com.barbosa.gabriel.optform.models.Session;
+import com.barbosa.gabriel.optform.models.Supervisor;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,17 +19,17 @@ import retrofit2.Retrofit;
 public class MainActivity extends BaseActivity {
     private Session session;
     private Supervisor supervisor;
-
     private TextView welcomeLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        session = ((MainApplication) getApplication()).getSession();
+        session = MainApplication.getSession();
         if (!session.isValid()) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
+            finishAffinity();
         } else {
             welcomeLabel = findViewById(R.id.welcome_label);
             showLoadingDialog(this);

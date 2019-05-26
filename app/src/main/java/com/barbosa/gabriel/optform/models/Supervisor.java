@@ -1,5 +1,5 @@
 
-package com.barbosa.gabriel.optform.model;
+package com.barbosa.gabriel.optform.models;
 
 import com.google.gson.annotations.SerializedName;
 

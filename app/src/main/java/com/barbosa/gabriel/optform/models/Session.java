@@ -1,4 +1,4 @@
-package com.barbosa.gabriel.optform.model;
+package com.barbosa.gabriel.optform.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -11,7 +11,7 @@ public class Session {
     private String instanceUrl;
 
     public Session(String accessToken, String instanceUrl) {
-        this.accessToken = "Bearer " + accessToken;
+        this.accessToken = accessToken;
         this.instanceUrl = instanceUrl;
     }
 
@@ -20,7 +20,7 @@ public class Session {
     }
 
     public String getAccessToken() {
-        return accessToken;
+        return "Bearer " + accessToken;
     }
 
     public void setAccessToken(String accessToken) {
