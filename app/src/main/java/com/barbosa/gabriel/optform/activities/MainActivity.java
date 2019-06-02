@@ -49,8 +49,15 @@ public class MainActivity extends BaseActivity {
                     welcomeLabel.setText(getString(R.string.welcome, supervisor.getName()));
                     hideLoadingDialog();
                 } else {
-                    Toast.makeText(MainActivity.this, getString(R.string.login_error), Toast.LENGTH_LONG).show();
-                    hideLoadingDialog();
+                    if (response.code() == 401 || response.code() == 403) {
+                        session.invalidate();
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                    } else {
+                        Toast.makeText(MainActivity.this, getString(R.string.login_error), Toast.LENGTH_LONG).show();
+                        hideLoadingDialog();
+                    }
                 }
             }
 

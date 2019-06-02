@@ -23,6 +23,11 @@ public class Session {
         return "Bearer " + accessToken;
     }
 
+    public void invalidate(){
+        this.accessToken = "";
+        this.instanceUrl = "";
+    }
+
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
