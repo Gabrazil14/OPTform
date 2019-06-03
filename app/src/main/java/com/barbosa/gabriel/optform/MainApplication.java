@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 
 import com.barbosa.gabriel.optform.interfaces.SalesForceLoginApi;
 import com.barbosa.gabriel.optform.models.Session;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
@@ -25,8 +27,11 @@ public class MainApplication extends Application {
 
     public static Retrofit getRetrofit(String url) {
         if (retrofit == null) {
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                    .create();
             retrofit = new Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(provideOkHttpClient())
                     .baseUrl(url)
                     .build();

@@ -1,50 +1,84 @@
-
 package com.barbosa.gabriel.optform.models;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+
 @SuppressWarnings("unused")
-public class Supervisor {
+public class Supervisor implements Parcelable {
 
     @SerializedName("Id")
-    private String mId;
+    private String id;
     @SerializedName("Name")
-    private String mName;
+    private String name;
     @SerializedName("Turno__c")
-    private String mTurnoC;
-    @SerializedName("UET__c")
-    private String mUETC;
+    private String turno;
+    @SerializedName("UET__r")
+    private UET uET;
+
+    private Supervisor(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        turno = in.readString();
+        uET = in.readParcelable(UET.class.getClassLoader());
+    }
+
+    public static final Creator<Supervisor> CREATOR = new Creator<Supervisor>() {
+        @Override
+        public Supervisor createFromParcel(Parcel in) {
+            return new Supervisor(in);
+        }
+
+        @Override
+        public Supervisor[] newArray(int size) {
+            return new Supervisor[size];
+        }
+    };
 
     public String getId() {
-        return mId;
+        return id;
     }
 
     public void setId(String id) {
-        mId = id;
+        this.id = id;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
-    public String getTurnoC() {
-        return mTurnoC;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setTurnoC(String turnoC) {
-        mTurnoC = turnoC;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 
-    public String getUETC() {
-        return mUETC;
+    public UET getUET() {
+        return uET;
     }
 
-    public void setUETC(String uETC) {
-        mUETC = uETC;
+    public void setUET(UET uETR) {
+        this.uET = uETR;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(turno);
+        dest.writeParcelable(uET, 0);
+    }
 }

@@ -2,7 +2,7 @@ package com.barbosa.gabriel.optform.activities;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.barbosa.gabriel.optform.dialogs.LoadingDialog;
 
@@ -16,14 +16,12 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void showLoadingDialog(Context context) {
-
         loadingDialog = new LoadingDialog(context);
         loadingDialog.show();
 
     }
 
     public void hideLoadingDialog() {
-
         if (loadingDialog != null)
             loadingDialog.dismiss();
 

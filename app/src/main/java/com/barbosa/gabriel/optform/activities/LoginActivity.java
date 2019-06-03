@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity {
                             startActivity(intent);
                             finishAffinity();
                         } else {
-                            Toast.makeText(LoginActivity.this, getString(R.string.login_error), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, getString(R.string.generic_error), Toast.LENGTH_LONG).show();
                             hideLoadingDialog();
                         }
 
@@ -70,7 +70,7 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call<Session> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, getString(R.string.login_error), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, getString(R.string.generic_error), Toast.LENGTH_LONG).show();
                         hideLoadingDialog();
                     }
                 });

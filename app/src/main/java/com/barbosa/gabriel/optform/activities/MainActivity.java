@@ -1,24 +1,36 @@
 package com.barbosa.gabriel.optform.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.barbosa.gabriel.optform.MainApplication;
 import com.barbosa.gabriel.optform.R;
 import com.barbosa.gabriel.optform.interfaces.OPTApi;
+import com.barbosa.gabriel.optform.models.Operator;
+import com.barbosa.gabriel.optform.models.Post;
+import com.barbosa.gabriel.optform.models.Questions;
 import com.barbosa.gabriel.optform.models.Session;
 import com.barbosa.gabriel.optform.models.Supervisor;
 
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends BaseActivity {
     private Session session;
     private Supervisor supervisor;
+    private Post post;
+    private ArrayList<Operator> operators;
+    private Questions questions;
     private TextView welcomeLabel;
 
     @Override
@@ -27,45 +39,123 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         session = MainApplication.getSession();
         if (!session.isValid()) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finishAffinity();
+            redirectToLogin();
         } else {
             welcomeLabel = findViewById(R.id.welcome_label);
+            Button newOPT = findViewById(R.id.btn_new_opt);
+            newOPT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, OPTActivity.class);
+                    intent.putExtra("supervisor", supervisor);
+                    intent.putExtra("post", post);
+                    intent.putParcelableArrayListExtra("operators", operators);
+                    intent.putExtra("questions", questions);
+                    startActivity(intent);
+                }
+            });
             showLoadingDialog(this);
-            loadSupervisorData();
+            LoadRequiredData loadRequiredData = new LoadRequiredData(MainActivity.this);
+            loadRequiredData.execute();
         }
     }
 
-    private void loadSupervisorData() {
-        Retrofit retrofit = MainApplication.getRetrofit(session.getInstanceUrl());
-        OPTApi optApi = retrofit.create(OPTApi.class);
-        Call<Supervisor> call = optApi.getSupervisor(session.getAccessToken());
-        call.enqueue(new Callback<Supervisor>() {
-            @Override
-            public void onResponse(Call<Supervisor> call, Response<Supervisor> response) {
-                if (response.isSuccessful()) {
-                    supervisor = response.body();
-                    welcomeLabel.setText(getString(R.string.welcome, supervisor.getName()));
-                    hideLoadingDialog();
-                } else {
-                    if (response.code() == 401 || response.code() == 403) {
-                        session.invalidate();
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finishAffinity();
-                    } else {
-                        Toast.makeText(MainActivity.this, getString(R.string.login_error), Toast.LENGTH_LONG).show();
-                        hideLoadingDialog();
-                    }
-                }
-            }
+    private void redirectToLogin() {
+        session.invalidate();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finishAffinity();
+    }
 
+    private void setWelcomeLabel(final String name) {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onFailure(Call<Supervisor> call, Throwable t) {
-                Toast.makeText(MainActivity.this, getString(R.string.login_error), Toast.LENGTH_LONG).show();
+            public void run() {
+                welcomeLabel.setText(getString(R.string.welcome, name));
+            }
+        });
+    }
+
+    private void showErrorToast() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, getString(R.string.generic_error), Toast.LENGTH_LONG).show();
                 hideLoadingDialog();
             }
         });
+    }
+
+    static class LoadRequiredData extends AsyncTask<Void, Void, Void> {
+        WeakReference<MainActivity> activityWeakReference;
+
+        LoadRequiredData(MainActivity mainActivity) {
+            activityWeakReference = new WeakReference<>(mainActivity);
+        }
+
+        @Override
+        protected Void doInBackground(Void[] voids) {
+            MainActivity mainActivity = activityWeakReference.get();
+            if (mainActivity != null) {
+                Supervisor supervisor;
+                Session session = mainActivity.session;
+                Post post;
+                ArrayList<Operator> operators;
+                Questions questions;
+
+                Retrofit retrofit = MainApplication.getRetrofit(session.getInstanceUrl());
+                OPTApi optApi = retrofit.create(OPTApi.class);
+                Call<Supervisor> supervisorCall = optApi.getSupervisor(session.getAccessToken());
+                try {
+                    Response<Supervisor> supervisorResponse = supervisorCall.execute();
+                    if (supervisorResponse.isSuccessful()) {
+                        supervisor = supervisorResponse.body();
+                        mainActivity.setWelcomeLabel(supervisor.getName());
+
+                        Call<Post> postCall = optApi.getPost(session.getAccessToken(), supervisor.getUET().getId());
+                        Response<Post> postResponse = postCall.execute();
+
+                        if (postResponse.isSuccessful()) {
+                            post = postResponse.body();
+
+                            Call<ArrayList<Operator>> operatorsCall = optApi.getOperators(session.getAccessToken(), supervisor.getId());
+                            Response<ArrayList<Operator>> operatorsResponse = operatorsCall.execute();
+                            if (operatorsResponse.isSuccessful()) {
+                                operators = operatorsResponse.body();
+
+                                Call<Questions> questionsCall = optApi.getQuestions(session.getAccessToken());
+                                Response<Questions> questionsResponse = questionsCall.execute();
+
+                                if (questionsResponse.isSuccessful()){
+                                    questions = questionsResponse.body();
+                                    mainActivity.supervisor = supervisor;
+                                    mainActivity.post = post;
+                                    mainActivity.operators = operators;
+                                    mainActivity.questions = questions;
+                                    mainActivity.hideLoadingDialog();
+                                }
+
+                            } else {
+                                mainActivity.showErrorToast();
+                            }
+
+                        } else {
+                            mainActivity.showErrorToast();
+                        }
+
+                    } else {
+                        if (supervisorResponse.code() == 401 || supervisorResponse.code() == 403) {
+                            mainActivity.redirectToLogin();
+                        } else {
+                            mainActivity.showErrorToast();
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    mainActivity.showErrorToast();
+                }
+            }
+            return null;
+        }
     }
 }
