@@ -57,6 +57,18 @@ public class MainActivity extends BaseActivity {
             showLoadingDialog(this);
             LoadRequiredData loadRequiredData = new LoadRequiredData(MainActivity.this);
             loadRequiredData.execute();
+
+            Button getOPTList = findViewById(R.id.btn_opt_list);
+            getOPTList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, OPTList.class);
+                    intent.putExtra("supervisor", supervisor);
+                    intent.putParcelableArrayListExtra("posts", posts);
+                    intent.putParcelableArrayListExtra("operators", operators);
+                    startActivity(intent);
+                }
+            });
         }
     }
 

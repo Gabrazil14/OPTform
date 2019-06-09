@@ -7,6 +7,7 @@ import com.barbosa.gabriel.optform.models.Questions;
 import com.barbosa.gabriel.optform.models.Supervisor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,4 +33,7 @@ public interface OPTApi {
 
     @POST("services/data/v36.0/sobjects/OPT__c")
     Call<OPT> sendOPT(@Header("Authorization") String token, @Body OPT opt);
+
+    @GET("services/apexrest/OPT/{supervisorId}")
+    Call<List<OPT>> getOPTs(@Header("Authorization") String token, @Path("supervisorId") String supervisorId);
 }

@@ -10,18 +10,23 @@
     <string name="logged_at">Logged at %s</string>
     <string name="generic_error">Something wrong happened, try again</string>
     <string name="main_title">Observação do postoId de trabalho</string>
-    <string name="welcome">Bim vindo, %s!</string>
+    <string name="welcome">Bem vindo, %s!</string>
     <string name="list_opts">Minhas OPTs</string>
     <string name="new_opt">Nova OPT</string>
     <string name="opt_supervisor_name">Nome: %s</string>
     <string name="opt_date">Data: %s</string>
     <string name="opt_post">Posto:</string>
+    <string name="opt_post_detail">Posto: %s</string>
     <string name="opt_shift">Turno: %s</string>
     <string name="opt_uet">UET: %s</string>
     <string name="opt_op">Operador:</string>
+    <string name="opt_op_detail">Operador: %s</string>
     <string name="opt_filter">Filtro:</string>
+    <string name="opt_filter_detail">Filtro: %s</string>
     <string name="opt_start">Começar</string>
     <string name="question_label">Pergunta %i: %s</string>
     <string name="send_opt">Enviar</string>
     <string name="opt_success">OPT Enviada com sucesso!</string>
+    <string name="search">pesquisar</string>
+    <string name="search_opt">Pesquise por data ou posto</string>
 </resources>

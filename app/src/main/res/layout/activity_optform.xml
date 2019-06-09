@@ -9,6 +9,6 @@
         android:id="@+id/recycler_view_opt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/opt_item" />
+        tools:listitem="@layout/opt_form_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

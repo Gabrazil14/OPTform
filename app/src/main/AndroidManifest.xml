@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.OPTFormActivity"></activity>
+        <activity android:name=".activities.OPTDetailsActivity"></activity>
+        <activity android:name=".activities.OPTList" />
+        <activity android:name=".activities.OPTFormActivity" />
         <activity
             android:name=".activities.OPTActivity"
             android:label="@string/new_opt" />

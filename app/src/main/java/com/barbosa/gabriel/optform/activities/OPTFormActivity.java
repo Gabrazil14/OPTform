@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.barbosa.gabriel.optform.MainApplication;
 import com.barbosa.gabriel.optform.R;
-import com.barbosa.gabriel.optform.adapters.OPTAdapter;
+import com.barbosa.gabriel.optform.adapters.OPTFormAdapter;
 import com.barbosa.gabriel.optform.interfaces.OPTApi;
 import com.barbosa.gabriel.optform.models.OPT;
 import com.barbosa.gabriel.optform.models.Questions;
@@ -22,8 +22,6 @@ import retrofit2.Retrofit;
 
 public class OPTFormActivity extends BaseActivity {
     private OPT opt;
-    private OPTAdapter optAdapter;
-    private RecyclerView optRecivlerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +68,7 @@ public class OPTFormActivity extends BaseActivity {
                     opt.getA7(),
                     opt.getA8(),
                     opt.getA9());
-            optAdapter = new OPTAdapter(questions, new OPTAdapter.FinishOPTCallback() {
+            OPTFormAdapter optFormAdapter = new OPTFormAdapter(questions, new OPTFormAdapter.FinishOPTCallback() {
                 @Override
                 public void sendOPT(Questions questions) {
                     showLoadingDialog(OPTFormActivity.this);
@@ -124,9 +122,9 @@ public class OPTFormActivity extends BaseActivity {
                     });
                 }
             });
-            optRecivlerView = findViewById(R.id.recycler_view_opt);
-            optRecivlerView.setLayoutManager(new LinearLayoutManager(this));
-            optRecivlerView.setAdapter(optAdapter);
+            RecyclerView optRecyclerView = findViewById(R.id.recycler_view_opt);
+            optRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            optRecyclerView.setAdapter(optFormAdapter);
         }
 
     }

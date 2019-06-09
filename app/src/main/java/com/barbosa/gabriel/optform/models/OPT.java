@@ -22,6 +22,8 @@ public class OPT implements Parcelable {
         }
     };
 
+    @SerializedName("Name")
+    private String name;
     @SerializedName("A10__c")
     private String a10;
     @SerializedName("A11__c")
@@ -115,7 +117,8 @@ public class OPT implements Parcelable {
     @SerializedName("Perguntas__c")
     private String questionsId;
 
-    public OPT(String filtroId,
+    public OPT(String name,
+               String filtroId,
                String operadorId,
                String postoId,
                String questionsId,
@@ -141,6 +144,7 @@ public class OPT implements Parcelable {
                String supervisorId,
                String uETId) {
 
+        this.name = name;
         this.filtroId = filtroId;
         this.operadorId = operadorId;
         this.postoId = postoId;
@@ -169,6 +173,7 @@ public class OPT implements Parcelable {
     }
 
     private OPT(Parcel in) {
+        name = in.readString();
         a10 = in.readString();
         a11 = in.readString();
         a12 = in.readString();
@@ -214,6 +219,15 @@ public class OPT implements Parcelable {
         supervisorId = in.readString();
         uETId = in.readString();
         questionsId = in.readString();
+        createdDate = (Date) in.readSerializable();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getA10() {
@@ -591,6 +605,7 @@ public class OPT implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
         dest.writeString(a10);
         dest.writeString(a11);
         dest.writeString(a12);
@@ -636,5 +651,6 @@ public class OPT implements Parcelable {
         dest.writeString(supervisorId);
         dest.writeString(uETId);
         dest.writeString(questionsId);
+        dest.writeSerializable(createdDate);
     }
 }

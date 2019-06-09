@@ -2,7 +2,6 @@ package com.barbosa.gabriel.optform.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -105,8 +104,10 @@ public class OPTActivity extends BaseActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                opt = new OPT(filter.getText().toString(),
-                        operator.getId(), post.getId(),
+                opt = new OPT(post.getId(),
+                        filter.getText().toString(),
+                        operator.getId(),
+                        post.getId(),
                         questions.getId(),
                         questions.getQ10(),
                         questions.getQ11(),
