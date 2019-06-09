@@ -28,7 +28,7 @@ import retrofit2.Retrofit;
 public class MainActivity extends BaseActivity {
     private Session session;
     private Supervisor supervisor;
-    private Post post;
+    private ArrayList<Post> posts;
     private ArrayList<Operator> operators;
     private Questions questions;
     private TextView welcomeLabel;
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this, OPTActivity.class);
                     intent.putExtra("supervisor", supervisor);
-                    intent.putExtra("post", post);
+                    intent.putParcelableArrayListExtra("posts", posts);
                     intent.putParcelableArrayListExtra("operators", operators);
                     intent.putExtra("questions", questions);
                     startActivity(intent);
@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity {
             if (mainActivity != null) {
                 Supervisor supervisor;
                 Session session = mainActivity.session;
-                Post post;
+                ArrayList<Post> posts;
                 ArrayList<Operator> operators;
                 Questions questions;
 
@@ -112,11 +112,11 @@ public class MainActivity extends BaseActivity {
                         supervisor = supervisorResponse.body();
                         mainActivity.setWelcomeLabel(supervisor.getName());
 
-                        Call<Post> postCall = optApi.getPost(session.getAccessToken(), supervisor.getUET().getId());
-                        Response<Post> postResponse = postCall.execute();
+                        Call<ArrayList<Post>> postCall = optApi.getPost(session.getAccessToken(), supervisor.getUET().getId());
+                        Response<ArrayList<Post>> postResponse = postCall.execute();
 
                         if (postResponse.isSuccessful()) {
-                            post = postResponse.body();
+                            posts = postResponse.body();
 
                             Call<ArrayList<Operator>> operatorsCall = optApi.getOperators(session.getAccessToken(), supervisor.getId());
                             Response<ArrayList<Operator>> operatorsResponse = operatorsCall.execute();
@@ -129,7 +129,7 @@ public class MainActivity extends BaseActivity {
                                 if (questionsResponse.isSuccessful()){
                                     questions = questionsResponse.body();
                                     mainActivity.supervisor = supervisor;
-                                    mainActivity.post = post;
+                                    mainActivity.posts = posts;
                                     mainActivity.operators = operators;
                                     mainActivity.questions = questions;
                                     mainActivity.hideLoadingDialog();

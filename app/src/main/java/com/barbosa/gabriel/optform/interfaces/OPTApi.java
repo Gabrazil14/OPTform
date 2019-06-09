@@ -22,7 +22,7 @@ public interface OPTApi {
     Call<Supervisor> getSupervisor(@Header("Authorization") String token);
 
     @GET("services/apexrest/Posto/{uETId}")
-    Call<Post> getPost(@Header("Authorization") String token, @Path("uETId") String uETId);
+    Call<ArrayList<Post>> getPost(@Header("Authorization") String token, @Path("uETId") String uETId);
 
     @GET("services/apexrest/Operadores/{supervisorId}")
     Call<ArrayList<Operator>> getOperators(@Header("Authorization") String token, @Path("supervisorId") String supervisorId);

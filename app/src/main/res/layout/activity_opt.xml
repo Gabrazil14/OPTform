@@ -27,23 +27,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/opt_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="22dp"
-        android:text="@string/opt_post"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/supervisor_name" />
-
-    <TextView
         android:id="@+id/opt_shift"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="22dp"
         android:text="@string/opt_shift"
         android:textSize="20sp"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/opt_date" />
 
     <TextView
@@ -53,8 +43,28 @@
         android:layout_margin="22dp"
         android:text="@string/opt_uet"
         android:textSize="20sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/opt_date" />
+
+    <TextView
+        android:id="@+id/opt_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="22dp"
+        android:text="@string/opt_post"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/opt_post" />
+        app:layout_constraintTop_toBottomOf="@id/opt_uet" />
+
+    <Spinner
+        android:id="@+id/spinner_opt_post"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/opt_post"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/opt_uet" />
 
     <TextView
         android:id="@+id/label_operator"
@@ -64,17 +74,20 @@
         android:text="@string/opt_op"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/opt_uet" />
+        app:layout_constraintTop_toBottomOf="@id/opt_post" />
 
     <Spinner
         android:id="@+id/spinner_opt_op"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp"
         android:textSize="20sp"
         app:layout_constraintLeft_toRightOf="@id/label_operator"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/opt_uet" />
+        app:layout_constraintTop_toBottomOf="@id/spinner_opt_post" />
 
     <TextView
         android:id="@+id/label_filter"

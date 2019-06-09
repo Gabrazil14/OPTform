@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.barbosa.gabriel.optform.R;
 import com.barbosa.gabriel.optform.adapters.OperatorAdapter;
+import com.barbosa.gabriel.optform.adapters.PostAdapter;
 import com.barbosa.gabriel.optform.models.OPT;
 import com.barbosa.gabriel.optform.models.Operator;
 import com.barbosa.gabriel.optform.models.Post;
@@ -33,6 +34,7 @@ public class OPTActivity extends BaseActivity {
     private OPT opt;
 
     private OperatorAdapter operatorAdapter;
+    private PostAdapter postAdapter;
 
     private EditText filter;
 
@@ -47,6 +49,7 @@ public class OPTActivity extends BaseActivity {
         TextView uet = findViewById(R.id.opt_uet);
         TextView postName = findViewById(R.id.opt_post);
         Spinner operatorsSpinner = findViewById(R.id.spinner_opt_op);
+        Spinner postSpinner = findViewById(R.id.spinner_opt_post);
 
         Button startButton = findViewById(R.id.btn_start);
         filter = findViewById(R.id.opt_filter);
@@ -62,9 +65,21 @@ public class OPTActivity extends BaseActivity {
             uet.setText(getString(R.string.opt_uet, supervisor.getUET().getName()));
         }
 
-        if (getIntent().hasExtra("post")) {
-            post = getIntent().getParcelableExtra("post");
-            postName.setText(getString(R.string.opt_post, post.getName()));
+        if (getIntent().hasExtra("posts")) {
+            ArrayList<Post> posts = getIntent().getParcelableArrayListExtra("posts");
+            postAdapter = new PostAdapter(OPTActivity.this, android.R.layout.simple_spinner_dropdown_item, posts);
+            postSpinner.setAdapter(postAdapter);
+            postSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    post = postAdapter.getItem(position);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
         if (getIntent().hasExtra("operators")) {

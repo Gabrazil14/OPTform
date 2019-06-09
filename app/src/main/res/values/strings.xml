@@ -15,7 +15,7 @@
     <string name="new_opt">Nova OPT</string>
     <string name="opt_supervisor_name">Nome: %s</string>
     <string name="opt_date">Data: %s</string>
-    <string name="opt_post">Posto: %s</string>
+    <string name="opt_post">Posto:</string>
     <string name="opt_shift">Turno: %s</string>
     <string name="opt_uet">UET: %s</string>
     <string name="opt_op">Operador:</string>
