@@ -47,7 +47,6 @@ public class OPTActivity extends BaseActivity {
         TextView date = findViewById(R.id.opt_date);
         TextView shift = findViewById(R.id.opt_shift);
         TextView uet = findViewById(R.id.opt_uet);
-        TextView postName = findViewById(R.id.opt_post);
         Spinner operatorsSpinner = findViewById(R.id.spinner_opt_op);
         Spinner postSpinner = findViewById(R.id.spinner_opt_post);
 
@@ -128,7 +127,7 @@ public class OPTActivity extends BaseActivity {
                         questions.getQ7(),
                         questions.getQ8(),
                         questions.getQ9(),
-                        questions.getQ10(),
+                        supervisor.getId(),
                         supervisor.getUET().getId());
 
                 Intent intent = new Intent(OPTActivity.this, OPTFormActivity.class);

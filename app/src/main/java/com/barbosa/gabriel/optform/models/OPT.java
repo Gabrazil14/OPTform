@@ -3,7 +3,6 @@ package com.barbosa.gabriel.optform.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
@@ -22,146 +21,103 @@ public class OPT implements Parcelable {
             return new OPT[size];
         }
     };
-    @Expose
+
     @SerializedName("A10__c")
     private String a10;
-    @Expose
     @SerializedName("A11__c")
     private String a11;
-    @Expose
     @SerializedName("A12__c")
     private String a12;
-    @Expose
     @SerializedName("A13__c")
     private String a13;
-    @Expose
     @SerializedName("A14__c")
     private String a14;
-    @Expose
     @SerializedName("A15__c")
     private String a15;
-    @Expose
     @SerializedName("A16__c")
     private String a16;
-    @Expose
     @SerializedName("A17__c")
     private String a17;
-    @Expose
     @SerializedName("A18__c")
     private String a18;
-    @Expose
     @SerializedName("A19__c")
     private String a19;
-    @Expose
     @SerializedName("A1__c")
     private String a1;
-    @Expose
     @SerializedName("A2__c")
     private String a2;
-    @Expose
     @SerializedName("A3__c")
     private String a3;
-    @Expose
     @SerializedName("A4__c")
     private String a4;
-    @Expose
     @SerializedName("A5__c")
     private String a5;
-    @Expose
     @SerializedName("A6__c")
     private String a6;
-    @Expose
     @SerializedName("A7__c")
     private String a7;
-    @Expose
     @SerializedName("A8__c")
     private String a8;
-    @Expose
     @SerializedName("A9__c")
     private String a9;
-    @Expose
     @SerializedName("CreatedDate")
     private Date createdDate;
     @SerializedName("Filtro__c")
-    @Expose
-    private String filtro;
+    private String filtroId;
     @SerializedName("Id")
     private String id;
-    @Expose
     @SerializedName("Operador__c")
-    private String operador;
-    @Expose
+    private String operadorId;
     @SerializedName("Posto__c")
-    private String posto;
+    private String postoId;
     @SerializedName("Q10__c")
-    @Expose
     private String q10;
-    @Expose
     @SerializedName("Q11__c")
     private String q11;
-    @Expose
     @SerializedName("Q12__c")
     private String q12;
     @SerializedName("Q13__c")
-    @Expose
     private String q13;
     @SerializedName("Q14__c")
-    @Expose
     private String q14;
-    @Expose
     @SerializedName("Q15__c")
     private String q15;
-    @Expose
     @SerializedName("Q16__c")
     private String q16;
-    @Expose
     @SerializedName("Q17__c")
     private String q17;
-    @Expose
     @SerializedName("Q18__c")
     private String q18;
-    @Expose
     @SerializedName("Q19__c")
     private String q19;
-    @Expose
     @SerializedName("Q1__c")
     private String q1;
-    @Expose
     @SerializedName("Q2__c")
     private String q2;
-    @Expose
     @SerializedName("Q3__c")
     private String q3;
-    @Expose
     @SerializedName("Q4__c")
     private String q4;
-    @Expose
     @SerializedName("Q5__c")
     private String q5;
-    @Expose
     @SerializedName("Q6__c")
     private String q6;
-    @Expose
     @SerializedName("Q7__c")
     private String q7;
-    @Expose
     @SerializedName("Q8__c")
     private String q8;
-    @Expose
     @SerializedName("Q9__c")
     private String q9;
-    @Expose
     @SerializedName("Supervisor__c")
-    private String supervisor;
-    @Expose
+    private String supervisorId;
     @SerializedName("UET__c")
-    private String uET;
-    @Expose
+    private String uETId;
+    @SerializedName("Perguntas__c")
     private String questionsId;
 
-    public OPT(String filtro,
-               String operador,
-               String posto,
+    public OPT(String filtroId,
+               String operadorId,
+               String postoId,
                String questionsId,
                String q10,
                String q11,
@@ -182,12 +138,12 @@ public class OPT implements Parcelable {
                String q7,
                String q8,
                String q9C,
-               String supervisor,
-               String uET) {
+               String supervisorId,
+               String uETId) {
 
-        this.filtro = filtro;
-        this.operador = operador;
-        this.posto = posto;
+        this.filtroId = filtroId;
+        this.operadorId = operadorId;
+        this.postoId = postoId;
         this.questionsId = questionsId;
         this.q10 = q10;
         this.q11 = q11;
@@ -208,8 +164,8 @@ public class OPT implements Parcelable {
         this.q7 = q7;
         this.q8 = q8;
         this.q9 = q9C;
-        this.supervisor = supervisor;
-        this.uET = uET;
+        this.supervisorId = supervisorId;
+        this.uETId = uETId;
     }
 
     private OPT(Parcel in) {
@@ -232,10 +188,10 @@ public class OPT implements Parcelable {
         a7 = in.readString();
         a8 = in.readString();
         a9 = in.readString();
-        filtro = in.readString();
+        filtroId = in.readString();
         id = in.readString();
-        operador = in.readString();
-        posto = in.readString();
+        operadorId = in.readString();
+        postoId = in.readString();
         q10 = in.readString();
         q11 = in.readString();
         q12 = in.readString();
@@ -255,8 +211,8 @@ public class OPT implements Parcelable {
         q7 = in.readString();
         q8 = in.readString();
         q9 = in.readString();
-        supervisor = in.readString();
-        uET = in.readString();
+        supervisorId = in.readString();
+        uETId = in.readString();
         questionsId = in.readString();
     }
 
@@ -420,12 +376,12 @@ public class OPT implements Parcelable {
         this.createdDate = createdDate;
     }
 
-    public String getFiltro() {
-        return filtro;
+    public String getFiltroId() {
+        return filtroId;
     }
 
-    public void setFiltro(String filtro) {
-        this.filtro = filtro;
+    public void setFiltroId(String filtroId) {
+        this.filtroId = filtroId;
     }
 
     public String getId() {
@@ -436,20 +392,20 @@ public class OPT implements Parcelable {
         this.id = id;
     }
 
-    public String getOperador() {
-        return operador;
+    public String getOperadorId() {
+        return operadorId;
     }
 
-    public void setOperador(String operador) {
-        this.operador = operador;
+    public void setOperadorId(String operadorId) {
+        this.operadorId = operadorId;
     }
 
-    public String getPosto() {
-        return posto;
+    public String getPostoId() {
+        return postoId;
     }
 
-    public void setPosto(String posto) {
-        this.posto = posto;
+    public void setPostoId(String postoId) {
+        this.postoId = postoId;
     }
 
     public String getQ10() {
@@ -604,20 +560,20 @@ public class OPT implements Parcelable {
         this.q9 = q9;
     }
 
-    public String getSupervisor() {
-        return supervisor;
+    public String getSupervisorId() {
+        return supervisorId;
     }
 
-    public void setSupervisor(String supervisor) {
-        this.supervisor = supervisor;
+    public void setSupervisorId(String supervisorId) {
+        this.supervisorId = supervisorId;
     }
 
     public String getUETC() {
-        return uET;
+        return uETId;
     }
 
     public void setUETC(String uETC) {
-        this.uET = uETC;
+        this.uETId = uETC;
     }
 
     public String getQuestionsId() {
@@ -654,10 +610,10 @@ public class OPT implements Parcelable {
         dest.writeString(a7);
         dest.writeString(a8);
         dest.writeString(a9);
-        dest.writeString(filtro);
+        dest.writeString(filtroId);
         dest.writeString(id);
-        dest.writeString(operador);
-        dest.writeString(posto);
+        dest.writeString(operadorId);
+        dest.writeString(postoId);
         dest.writeString(q10);
         dest.writeString(q11);
         dest.writeString(q12);
@@ -677,8 +633,8 @@ public class OPT implements Parcelable {
         dest.writeString(q7);
         dest.writeString(q8);
         dest.writeString(q9);
-        dest.writeString(supervisor);
-        dest.writeString(uET);
+        dest.writeString(supervisorId);
+        dest.writeString(uETId);
         dest.writeString(questionsId);
     }
 }

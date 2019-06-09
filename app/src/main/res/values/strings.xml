@@ -9,7 +9,7 @@
     <string name="login">Login</string>
     <string name="logged_at">Logged at %s</string>
     <string name="generic_error">Something wrong happened, try again</string>
-    <string name="main_title">Observação do posto de trabalho</string>
+    <string name="main_title">Observação do postoId de trabalho</string>
     <string name="welcome">Bim vindo, %s!</string>
     <string name="list_opts">Minhas OPTs</string>
     <string name="new_opt">Nova OPT</string>

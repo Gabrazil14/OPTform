@@ -30,6 +30,6 @@ public interface OPTApi {
     @GET("services/apexrest/Perguntas")
     Call<Questions> getQuestions(@Header("Authorization") String token);
 
-    @POST("services/apexrest/OPT")
+    @POST("services/data/v36.0/sobjects/OPT__c")
     Call<OPT> sendOPT(@Header("Authorization") String token, @Body OPT opt);
 }
