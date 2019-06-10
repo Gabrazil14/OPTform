@@ -73,24 +73,24 @@ public class OPTFormActivity extends BaseActivity {
                 public void sendOPT(Questions questions) {
                     showLoadingDialog(OPTFormActivity.this);
                     opt.setA1(questions.getA1());
-                    opt.setA2(questions.getA1());
-                    opt.setA3(questions.getA1());
-                    opt.setA4(questions.getA1());
-                    opt.setA5(questions.getA1());
-                    opt.setA6(questions.getA1());
-                    opt.setA7(questions.getA1());
-                    opt.setA8(questions.getA1());
-                    opt.setA9(questions.getA1());
-                    opt.setA10(questions.getA1());
-                    opt.setA11(questions.getA1());
-                    opt.setA12(questions.getA1());
-                    opt.setA13(questions.getA1());
-                    opt.setA14(questions.getA1());
-                    opt.setA15(questions.getA1());
-                    opt.setA16(questions.getA1());
-                    opt.setA17(questions.getA1());
-                    opt.setA18(questions.getA1());
-                    opt.setA19(questions.getA1());
+                    opt.setA2(questions.getA2());
+                    opt.setA3(questions.getA3());
+                    opt.setA4(questions.getA4());
+                    opt.setA5(questions.getA5());
+                    opt.setA6(questions.getA6());
+                    opt.setA7(questions.getA6());
+                    opt.setA8(questions.getA8());
+                    opt.setA9(questions.getA9());
+                    opt.setA10(questions.getA10());
+                    opt.setA11(questions.getA11());
+                    opt.setA12(questions.getA12());
+                    opt.setA13(questions.getA13());
+                    opt.setA14(questions.getA14());
+                    opt.setA15(questions.getA15());
+                    opt.setA16(questions.getA16());
+                    opt.setA17(questions.getA17());
+                    opt.setA18(questions.getA18());
+                    opt.setA19(questions.getA19());
 
                     Session session = MainApplication.getSession();
 
